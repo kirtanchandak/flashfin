@@ -11,6 +11,11 @@
 <body>
 
     <h1>The Name and Emails of the Client</h1>
+    <hr><br>
+    <hr>
+    {% for key,value in emails.items() %}
+    <p>{{key}} - {{value}}</p>
+    {% endfor %}
 </body>
 
 </html>

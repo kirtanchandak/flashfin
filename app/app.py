@@ -1,7 +1,11 @@
 from flask import Flask, render_template
 import requests,json
+from dotenv import load_dotenv
+import os
 
-url = 'https://flashfin-4b7a6-default-rtdb.firebaseio.com/userData.json'
+load_dotenv()
+
+url = os.getenv("FLASK_FIREBASE_URL")
 response = requests.get(url)
 
 if response.status_code == 200:  
@@ -21,6 +25,5 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    for key, value in emails.items():
-        return print(f" Hi {key}!! Your Email is  {value}", end="\n")
+    return render_template('index.html', emails=emails)
    
