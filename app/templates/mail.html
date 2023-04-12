@@ -9,7 +9,12 @@
 </head>
 
 <body>
-    The mail was sent succesfully to {email}.
+    {% if success %}
+    <h1>Mail Sent Successfully</h1>
+    {% else %}
+    <h1>Mail Not Sent</h1>
+    {% endif %}
+
 </body>
 
 </html>
