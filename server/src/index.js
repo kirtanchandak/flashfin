@@ -45,6 +45,23 @@ app.post("/submit", async (req, res) => {
   let userInput = req.body.userInput;
   emails.push(userInput);
   console.log(emails);
+
+  // Define collection and insert new input into MongoDB collection
+  const db = client.db(dbName);
+  const collection = db.collection(collectionName);
+
+  try {
+    await collection.updateOne(
+      { name: "inputs" },
+      { $set: { inputs: emails } },
+      { upsert: true }
+    );
+    console.log("Input saved to database");
+    res.send({ message: "Input received" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ error: "Error saving input to database" });
+  }
 });
 
 app.listen(5000, () => {
